@@ -14,8 +14,6 @@ import {
 // import { Excalidraw } from "@excalidraw/excalidraw";
 import { Copy, Check } from "lucide-react";
 import { toast } from "sonner";
-import { Toaster } from "@/components/ui/sonner";
-import Link from "next/link";
 
 type Coordinate = {
   x: number | string;
@@ -102,145 +100,129 @@ export default function PublicAppPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100">
-      <header className="bg-white shadow">
-        <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 flex justify-between items-center">
-          <h1 className="text-3xl font-bold text-gray-900">GraphMaster</h1>
-          <div>
-            <Button asChild variant="outline" className="mr-4">
-              <Link href="/sign-in">Sign In</Link>
-            </Button>
-            <Button asChild>
-              <Link href="/sign-up">Sign Up</Link>
-            </Button>
-          </div>
-        </div>
-      </header>
-      <main className="max-w-screen-xl mx-auto p-8">
-        <div className="bg-white p-6 rounded-lg shadow mb-8">
-          <h2 className="text-xl font-semibold mb-4">Try GraphMaster</h2>
-          <p className="mb-4">
-            Create and copy your graph without signing in. To save your work,
-            please sign up for an account.
-          </p>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div className="bg-white p-6 rounded-lg shadow">
-            <h2 className="text-xl font-semibold mb-4">Graph Settings</h2>
-            <div className="space-y-4">
-              <div>
-                <Label htmlFor="graph-type">Graph Type</Label>
-                <Select
-                  value={graphData.type}
-                  onValueChange={(value) => {
-                    // setGraphData((prev) => ({ ...prev, type: value }))
-                  }}
-                >
-                  <SelectTrigger id="graph-type">
-                    <SelectValue placeholder="Select graph type" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="bar">Bar Chart</SelectItem>
-                    <SelectItem value="line">Line Chart</SelectItem>
-                    <SelectItem value="pie">Pie Chart</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-              <div>
-                <Label htmlFor="graph-title">Graph Title</Label>
-                <Input
-                  id="graph-title"
-                  value={graphData.title}
-                  onChange={(e) =>
-                    setGraphData((prev) => ({ ...prev, title: e.target.value }))
-                  }
-                  placeholder="Enter graph title"
-                />
-              </div>
-              <div>
-                <Label htmlFor="x-axis">X-Axis Label</Label>
-                <Input
-                  id="x-axis"
-                  value={graphData.xAxis}
-                  onChange={(e) =>
-                    setGraphData((prev) => ({ ...prev, xAxis: e.target.value }))
-                  }
-                  placeholder="Enter X-axis label"
-                />
-              </div>
-              <div>
-                <Label htmlFor="y-axis">Y-Axis Label</Label>
-                <Input
-                  id="y-axis"
-                  value={graphData.yAxis}
-                  onChange={(e) =>
-                    setGraphData((prev) => ({ ...prev, yAxis: e.target.value }))
-                  }
-                  placeholder="Enter Y-axis label"
-                />
-              </div>
-              <div>
-                <h3 className="text-lg font-semibold mb-2">Add Data Points</h3>
-                <div className="flex space-x-2">
-                  <Input
-                    value={dataPoint.x}
-                    onChange={(e) =>
-                      setDataPoint((prev) => ({ ...prev, x: e.target.value }))
-                    }
-                    placeholder="X value"
-                  />
-                  <Input
-                    value={dataPoint.y}
-                    onChange={(e) =>
-                      setDataPoint((prev) => ({ ...prev, y: e.target.value }))
-                    }
-                    placeholder="Y value"
-                    type="number"
-                  />
-                  <Button onClick={addDataPoint}>Add</Button>
-                </div>
-              </div>
-              <div>
-                <h3 className="text-lg font-semibold mb-2">Data Points</h3>
-                <ul className="list-disc pl-5">
-                  {graphData.data.map((point, index) => (
-                    <li key={index}>
-                      X: {point.x}, Y: {point.y}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          </div>
-          <div className="bg-white p-6 rounded-lg shadow">
-            <div className="flex justify-between items-center mb-4">
-              <h2 className="text-xl font-semibold">Graph Preview</h2>
-              <Button
-                onClick={copyToClipboard}
-                variant="outline"
-                className="flex items-center gap-2"
+    <main className="max-w-screen-xl mx-auto p-8">
+      <div className="bg-white p-6 rounded-lg shadow mb-8">
+        <h2 className="text-xl font-semibold mb-4">Try GraphMaster</h2>
+        <p className="mb-4">
+          Create and copy your graph without signing in. To save your work,
+          please sign up for an account.
+        </p>
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="bg-white p-6 rounded-lg shadow">
+          <h2 className="text-xl font-semibold mb-4">Graph Settings</h2>
+          <div className="space-y-4">
+            <div>
+              <Label htmlFor="graph-type">Graph Type</Label>
+              <Select
+                value={graphData.type}
+                onValueChange={(value) => {
+                  // setGraphData((prev) => ({ ...prev, type: value }))
+                }}
               >
-                {copied ? (
-                  <Check className="h-4 w-4" />
-                ) : (
-                  <Copy className="h-4 w-4" />
-                )}
-                {copied ? "Copied!" : "Copy to Clipboard"}
-              </Button>
+                <SelectTrigger id="graph-type">
+                  <SelectValue placeholder="Select graph type" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="bar">Bar Chart</SelectItem>
+                  <SelectItem value="line">Line Chart</SelectItem>
+                  <SelectItem value="pie">Pie Chart</SelectItem>
+                </SelectContent>
+              </Select>
             </div>
-            <div
-              className="border border-gray-300 rounded-lg overflow-hidden"
-              style={{ height: "500px" }}
+            <div>
+              <Label htmlFor="graph-title">Graph Title</Label>
+              <Input
+                id="graph-title"
+                value={graphData.title}
+                onChange={(e) =>
+                  setGraphData((prev) => ({ ...prev, title: e.target.value }))
+                }
+                placeholder="Enter graph title"
+              />
+            </div>
+            <div>
+              <Label htmlFor="x-axis">X-Axis Label</Label>
+              <Input
+                id="x-axis"
+                value={graphData.xAxis}
+                onChange={(e) =>
+                  setGraphData((prev) => ({ ...prev, xAxis: e.target.value }))
+                }
+                placeholder="Enter X-axis label"
+              />
+            </div>
+            <div>
+              <Label htmlFor="y-axis">Y-Axis Label</Label>
+              <Input
+                id="y-axis"
+                value={graphData.yAxis}
+                onChange={(e) =>
+                  setGraphData((prev) => ({ ...prev, yAxis: e.target.value }))
+                }
+                placeholder="Enter Y-axis label"
+              />
+            </div>
+            <div>
+              <h3 className="text-lg font-semibold mb-2">Add Data Points</h3>
+              <div className="flex space-x-2">
+                <Input
+                  value={dataPoint.x}
+                  onChange={(e) =>
+                    setDataPoint((prev) => ({ ...prev, x: e.target.value }))
+                  }
+                  placeholder="X value"
+                />
+                <Input
+                  value={dataPoint.y}
+                  onChange={(e) =>
+                    setDataPoint((prev) => ({ ...prev, y: e.target.value }))
+                  }
+                  placeholder="Y value"
+                  type="number"
+                />
+                <Button onClick={addDataPoint}>Add</Button>
+              </div>
+            </div>
+            <div>
+              <h3 className="text-lg font-semibold mb-2">Data Points</h3>
+              <ul className="list-disc pl-5">
+                {graphData.data.map((point, index) => (
+                  <li key={index}>
+                    X: {point.x}, Y: {point.y}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div className="bg-white p-6 rounded-lg shadow">
+          <div className="flex justify-between items-center mb-4">
+            <h2 className="text-xl font-semibold">Graph Preview</h2>
+            <Button
+              onClick={copyToClipboard}
+              variant="outline"
+              className="flex items-center gap-2"
             >
-              {/* <Excalidraw
+              {copied ? (
+                <Check className="h-4 w-4" />
+              ) : (
+                <Copy className="h-4 w-4" />
+              )}
+              {copied ? "Copied!" : "Copy to Clipboard"}
+            </Button>
+          </div>
+          <div
+            className="border border-gray-300 rounded-lg overflow-hidden"
+            style={{ height: "500px" }}
+          >
+            {/* <Excalidraw
               initialData={{ elements: generateExcalidrawElements() }}
               onChange={(elements) => setExcalidrawElements(elements)}
               /> */}
-            </div>
           </div>
         </div>
-      </main>
-      <Toaster />
-    </div>
+      </div>
+    </main>
   );
 }

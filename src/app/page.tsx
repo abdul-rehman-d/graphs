@@ -1,32 +1,10 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { CTAButton } from "@/components/landing-page/cta-button";
 
 export default function LandingPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-100 to-white">
-      <header className="bg-white shadow">
-        <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <div className="flex justify-between items-center">
-            <div className="flex items-center">
-              <span className="text-2xl font-bold text-blue-600">
-                GraphMaster
-              </span>
-            </div>
-            <div className="flex items-center space-x-4">
-              <Link
-                href="/sign-in"
-                className="text-gray-600 hover:text-gray-900"
-              >
-                Sign In
-              </Link>
-              <Button asChild>
-                <Link href="/app">Try Now</Link>
-              </Button>
-            </div>
-          </div>
-        </nav>
-      </header>
-
+    <>
       <main>
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
           <div className="text-center">
@@ -38,12 +16,10 @@ export default function LandingPage() {
               for presentations, documentation, and brainstorming sessions.
             </p>
             <div className="mt-5 max-w-md mx-auto sm:flex sm:justify-center md:mt-8">
-              <div className="rounded-md shadow">
-                <Button asChild size="lg">
-                  <Link href="/app">Get Started for Free</Link>
-                </Button>
+              <div className="">
+                <CTAButton signedOutText="Get Started For Free" />
               </div>
-              <div className="mt-3 rounded-md shadow sm:mt-0 sm:ml-3">
+              <div className="mt-3 sm:mt-0 sm:ml-3">
                 <Button asChild variant="outline" size="lg">
                   <Link href="#features">Learn More</Link>
                 </Button>
@@ -159,9 +135,13 @@ export default function LandingPage() {
                 visuals with GraphMaster.
               </p>
               <div className="mt-8">
-                <Button asChild size="lg">
-                  <Link href="/sign-up">Get Started for Free</Link>
-                </Button>
+                <CTAButton
+                  signedOutText="Get Started for Free"
+                  signedInText="Go to Dashboard Now"
+                  buttonProps={{
+                    size: "lg",
+                  }}
+                />
               </div>
             </div>
           </div>
@@ -175,6 +155,6 @@ export default function LandingPage() {
           </p>
         </div>
       </footer>
-    </div>
+    </>
   );
 }
