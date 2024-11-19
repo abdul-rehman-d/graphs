@@ -41,7 +41,7 @@ export default function LandingPage() {
 
             <div className="mt-20 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
               <div className="flex flex-col items-center">
-                <div className="flex items-center justify-center h-12 w-12 rounded-md bg-blue-500 text-white">
+                <div className="flex items-center justify-center h-12 w-12 rounded-md bg-primary text-white">
                   <svg
                     className="h-6 w-6"
                     fill="none"
@@ -72,7 +72,7 @@ export default function LandingPage() {
               </div>
 
               <div className="flex flex-col items-center">
-                <div className="flex items-center justify-center h-12 w-12 rounded-md bg-blue-500 text-white">
+                <div className="flex items-center justify-center h-12 w-12 rounded-md bg-primary text-white">
                   <svg
                     className="h-6 w-6"
                     fill="none"
@@ -97,7 +97,7 @@ export default function LandingPage() {
               </div>
 
               <div className="flex flex-col items-center">
-                <div className="flex items-center justify-center h-12 w-12 rounded-md bg-blue-500 text-white">
+                <div className="flex items-center justify-center h-12 w-12 rounded-md bg-primary text-white">
                   <svg
                     className="h-6 w-6"
                     fill="none"
@@ -124,7 +124,7 @@ export default function LandingPage() {
           </div>
         </section>
 
-        <section className="bg-blue-50 py-20">
+        <section className="bg-primary-10 py-20">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center">
               <h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">

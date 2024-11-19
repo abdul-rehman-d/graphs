@@ -32,7 +32,7 @@ export default function RootLayout({
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
-          <div className="min-h-screen flex flex-col bg-gradient-to-b from-blue-100 to-white">
+          <div className="min-h-screen flex flex-col bg-gradient-to-b from-primary-10 to-white">
             <Topbar />
             {children}
           </div>
