@@ -1,9 +1,9 @@
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
-import { Suspense } from "react";
 
 async function createNewGraph(userId: string) {
-  return new Promise<string>((resolve, reject) => {
+  console.log("userId", userId);
+  return new Promise<string>((resolve) => {
     setTimeout(() => {
       resolve("1");
     }, 2000);

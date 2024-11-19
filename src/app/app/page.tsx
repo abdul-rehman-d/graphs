@@ -38,7 +38,7 @@ export default function PublicAppPage() {
   });
   const [dataPoint, setDataPoint] = useState<Coordinate>({ x: "", y: "" });
   const [copied, setCopied] = useState(false);
-  const [excalidrawElements, setExcalidrawElements] = useState([]);
+  const [excalidrawElements] = useState([]);
 
   const addDataPoint = () => {
     if (dataPoint.x && dataPoint.y) {
@@ -59,27 +59,27 @@ export default function PublicAppPage() {
     }
   };
 
-  const generateExcalidrawElements = () => {
-    // This is a simplified example. In a real application, you'd generate
-    // more complex Excalidraw elements based on the graph type and data.
-    const elements = [
-      {
-        type: "rectangle",
-        x: 10,
-        y: 10,
-        width: 100,
-        height: 100,
-        backgroundColor: "lightblue",
-      },
-      {
-        type: "text",
-        x: 20,
-        y: 20,
-        text: graphData.title,
-      },
-    ];
-    return elements;
-  };
+  //const generateExcalidrawElements = () => {
+  //  // This is a simplified example. In a real application, you'd generate
+  //  // more complex Excalidraw elements based on the graph type and data.
+  //  const elements = [
+  //    {
+  //      type: "rectangle",
+  //      x: 10,
+  //      y: 10,
+  //      width: 100,
+  //      height: 100,
+  //      backgroundColor: "lightblue",
+  //    },
+  //    {
+  //      type: "text",
+  //      x: 20,
+  //      y: 20,
+  //      text: graphData.title,
+  //    },
+  //  ];
+  //  return elements;
+  //};
 
   const copyToClipboard = async () => {
     try {
@@ -94,7 +94,7 @@ export default function PublicAppPage() {
       setTimeout(() => setCopied(false), 2000);
     } catch (err) {
       toast.error("Error", {
-        description: "Failed to copy graph data to clipboard.",
+        description: "Failed to copy graph data to clipboard: " + err,
       });
     }
   };
@@ -116,7 +116,7 @@ export default function PublicAppPage() {
               <Label htmlFor="graph-type">Graph Type</Label>
               <Select
                 value={graphData.type}
-                onValueChange={(value) => {
+                onValueChange={() => {
                   // setGraphData((prev) => ({ ...prev, type: value }))
                 }}
               >
