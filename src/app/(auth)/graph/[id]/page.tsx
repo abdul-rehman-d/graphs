@@ -3,9 +3,9 @@ import { auth } from "@clerk/nextjs/server";
 export default async function GraphPage({
   params,
 }: {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }) {
-  const graphId = params.id;
+  const graphId = (await params).id;
   const { userId } = await auth();
 
   if (!userId) return;
