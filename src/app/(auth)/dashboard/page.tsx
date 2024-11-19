@@ -14,12 +14,13 @@ import { eq } from "drizzle-orm";
 import Link from "next/link";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
+import { CopyToClipboardButton } from "@/components/common/copy-button";
 
 dayjs.extend(relativeTime);
 
 export default async function DashboardPage() {
   const { userId } = await auth();
-  if (!userId) return
+  if (!userId) return;
 
   const graphs = await db
     .select()
@@ -39,19 +40,23 @@ export default async function DashboardPage() {
           </Button>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {graphs.map(graph => (
+          {graphs.map((graph) => (
             <Link href={`/graph/${graph.id}`} key={graph.id}>
               <Card>
                 <CardHeader>
                   <CardTitle>{graph.name}</CardTitle>
-                  <CardDescription>Edited {dayjs(graph.updatedAt).fromNow()}</CardDescription>
+                  <CardDescription>
+                    Edited {dayjs(graph.updatedAt).fromNow()}
+                  </CardDescription>
                 </CardHeader>
-                <CardContent>
-                </CardContent>
+                <CardContent></CardContent>
                 <CardFooter className="flex flex-row items-center justify-between">
-                  <Button variant="outline">
-                    Copy to Clipboard
-                  </Button>
+                  <CopyToClipboardButton
+                    variant="outline"
+                    graphData={graph.graphData}
+                    className="flex flex-row gap-2"
+                    toastTitle={`Copied ${graph.name}!`}
+                  />
                   <Button variant="default" asChild>
                     <span>Open</span>
                   </Button>

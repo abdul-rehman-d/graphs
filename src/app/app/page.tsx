@@ -12,8 +12,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 // import { Excalidraw } from "@excalidraw/excalidraw";
-import { Copy, Check } from "lucide-react";
-import { toast } from "sonner";
+
+import { CopyToClipboardButton } from "@/components/common/copy-button";
 
 type Coordinate = {
   x: number | string;
@@ -37,7 +37,6 @@ export default function PublicAppPage() {
     data: [],
   });
   const [dataPoint, setDataPoint] = useState<Coordinate>({ x: "", y: "" });
-  const [copied, setCopied] = useState(false);
   const [excalidrawElements] = useState([]);
 
   const addDataPoint = () => {
@@ -80,24 +79,6 @@ export default function PublicAppPage() {
   //  ];
   //  return elements;
   //};
-
-  const copyToClipboard = async () => {
-    try {
-      const elements = excalidrawElements;
-      const serializedElements = JSON.stringify(elements);
-      await navigator.clipboard.writeText(serializedElements);
-      setCopied(true);
-      toast.success("Copied!", {
-        description:
-          "Graph data copied to clipboard. You can now paste it into Excalidraw.",
-      });
-      setTimeout(() => setCopied(false), 2000);
-    } catch (err) {
-      toast.error("Error", {
-        description: "Failed to copy graph data to clipboard: " + err,
-      });
-    }
-  };
 
   return (
     <main className="max-w-screen-xl mx-auto p-8">
@@ -199,18 +180,11 @@ export default function PublicAppPage() {
         <div className="bg-white p-6 rounded-lg shadow">
           <div className="flex justify-between items-center mb-4">
             <h2 className="text-xl font-semibold">Graph Preview</h2>
-            <Button
-              onClick={copyToClipboard}
+            <CopyToClipboardButton
               variant="outline"
               className="flex items-center gap-2"
-            >
-              {copied ? (
-                <Check className="h-4 w-4" />
-              ) : (
-                <Copy className="h-4 w-4" />
-              )}
-              {copied ? "Copied!" : "Copy to Clipboard"}
-            </Button>
+              graphData={excalidrawElements}
+            />
           </div>
           <div
             className="border border-gray-300 rounded-lg overflow-hidden"
