@@ -24,6 +24,7 @@ export const metadata: Metadata = {
     title: "Cali Graphs",
     description: "Generate beautiful graphs for Excalidraw",
     url: "https://cali-graphs.vercel.app/",
+    siteName: "Cali Graphs",
   },
   twitter: {
     title: "Cali Graphs",
