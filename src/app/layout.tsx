@@ -19,6 +19,16 @@ const geistMono = localFont({
 export const metadata: Metadata = {
   title: "Cali Graphs",
   description: "Generate beautiful graphs for Excalidraw",
+  openGraph: {
+    type: "website",
+    title: "Cali Graphs",
+    description: "Generate beautiful graphs for Excalidraw",
+    url: "https://cali-graphs.vercel.app/",
+  },
+  twitter: {
+    title: "Cali Graphs",
+    description: "Generate beautiful graphs for Excalidraw",
+  },
 };
 
 export default function RootLayout({
