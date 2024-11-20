@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import dynamic from "next/dynamic";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
@@ -13,7 +14,13 @@ import {
 } from "../ui/select";
 
 import { CopyToClipboardButton } from "./copy-button";
-// import { Excalidraw } from "@excalidraw/excalidraw";
+import { Spinner } from "./spinner";
+const GraphPreview = dynamic(
+  async () => (await import("./graph-preview")).default,
+  {
+    ssr: false,
+  },
+);
 
 type Coordinate = {
   x: number | string;
@@ -28,10 +35,11 @@ type Graph = {
   data: Coordinate[];
 };
 
-export function GraphCreator({}: {
+export function GraphCreator({ }: {
   initialGraph?: unknown;
   onChange: () => void;
 }) {
+  const [isMounted, setIsMounted] = useState(false);
   const [graphData, setGraphData] = useState<Graph>({
     type: "bar",
     title: "",
@@ -82,6 +90,10 @@ export function GraphCreator({}: {
   //  ];
   //  return elements;
   //};
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -185,10 +197,11 @@ export function GraphCreator({}: {
           className="border border-gray-300 rounded-lg overflow-hidden"
           style={{ height: "500px" }}
         >
-          {/* <Excalidraw
-          initialData={{ elements: generateExcalidrawElements() }}
-          onChange={(elements) => setExcalidrawElements(elements)}
-          /> */}
+          {isMounted ? (
+            <GraphPreview initialData={undefined} onChange={undefined} />
+          ) : (
+            <Spinner />
+          )}
         </div>
       </div>
     </div>
