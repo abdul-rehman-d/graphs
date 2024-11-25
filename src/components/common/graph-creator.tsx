@@ -12,19 +12,33 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 
 import { CopyToClipboardButton } from "./copy-button";
 import { Spinner } from "./spinner";
+import { TrashIcon } from "lucide-react";
 const GraphPreview = dynamic(
   async () => (await import("./graph-preview")).default,
   {
     ssr: false,
-  },
+  }
 );
 
 type Coordinate = {
-  x: number | string;
-  y: number | string;
+  x: string;
+  y: number;
+};
+
+type RawCoordinate = {
+  x: string;
+  y: string;
 };
 
 type Graph = {
@@ -35,7 +49,7 @@ type Graph = {
   data: Coordinate[];
 };
 
-export function GraphCreator({ }: {
+export function GraphCreator({}: {
   initialGraph?: unknown;
   onChange: () => void;
 }) {
@@ -47,7 +61,7 @@ export function GraphCreator({ }: {
     yAxis: "",
     data: [],
   });
-  const [dataPoint, setDataPoint] = useState<Coordinate>({ x: "", y: "" });
+  const [dataPoint, setDataPoint] = useState<RawCoordinate>({ x: "", y: "" });
   const [excalidrawElements] = useState([]);
 
   const addDataPoint = () => {
@@ -58,10 +72,7 @@ export function GraphCreator({ }: {
           ...prev.data,
           {
             x: dataPoint.x,
-            y:
-              typeof dataPoint.y === "string"
-                ? parseFloat(dataPoint.y)
-                : dataPoint.y,
+            y: parseFloat(dataPoint.y),
           },
         ],
       }));
@@ -113,8 +124,6 @@ export function GraphCreator({ }: {
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="bar">Bar Chart</SelectItem>
-                <SelectItem value="line">Line Chart</SelectItem>
-                <SelectItem value="pie">Pie Chart</SelectItem>
               </SelectContent>
             </Select>
           </div>
@@ -174,13 +183,32 @@ export function GraphCreator({ }: {
           </div>
           <div>
             <h3 className="text-lg font-semibold mb-2">Data Points</h3>
-            <ul className="list-disc pl-5">
-              {graphData.data.map((point, index) => (
-                <li key={index}>
-                  X: {point.x}, Y: {point.y}
-                </li>
-              ))}
-            </ul>
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead className="w-1/2">
+                    {graphData.xAxis || "X Values"}
+                  </TableHead>
+                  <TableHead className="w-1/2">
+                    {graphData.yAxis || "Y Values"}
+                  </TableHead>
+                  <TableHead className="w-12"></TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {graphData.data.map((point, index) => (
+                  <TableRow key={index}>
+                    <TableCell className="text-left">{point.x}</TableCell>
+                    <TableCell className="text-left">{point.y}</TableCell>
+                    <TableCell className="text-right">
+                      <Button variant="destructive" size="icon">
+                        <TrashIcon />
+                      </Button>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
           </div>
         </div>
       </div>
