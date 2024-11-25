@@ -2,6 +2,10 @@
 
 A platform to create and save beautiful graphs for [Excalidraw](https://excalidraw.com/)
 
+## NOTE:
+
+This thing is entirely useful. Excalidraw has [a way](https://www.linkedin.com/posts/excalidraw_how-to-create-charts-in-excalidraw-activity-7102261258560659457-_BSl) to add graphs natively and I will not continue to make this ;-; (Date: 25/Nov/2025)
+
 ## Todo
 
 - [ ] Actually make the graph work
